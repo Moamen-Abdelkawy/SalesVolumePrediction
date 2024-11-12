@@ -1,26 +1,61 @@
-### SalesVolumePrediction
+# Sales Volume Prediction
 
-This repository contains an end-to-end machine learning pipeline for predicting sales volume using various regression models. The project explores multiple advanced machine learning techniques, including traditional ensemble methods and deep learning models, to accurately forecast sales volume based on historical data.
+This repository contains a comprehensive data science project focused on predicting sales volume based on various product features, product positioning, and promotional effects. The project implements exploratory data analysis (EDA), data cleaning, and multiple machine learning models to understand the drivers behind sales volume.
 
-#### Key Features:
+## Project Structure
 
-- **Data Preprocessing**: Comprehensive data cleaning and preprocessing pipeline, including handling of numerical and categorical variables, scaling, and one-hot encoding.
+- `sales_volume_prediction.ipynb`: Main notebook covering all stages of the analysis, from data cleaning to predictive modeling.
+- `data/`: Directory containing the raw and processed data files.
+- `dcn_tuning/`: Folder for configurations related to deep complex network tuning.
 
-- **Model Selection**: Implementation and evaluation of multiple models, including:
-  - **Random Forest Regressor** - An ensemble model known for its robustness and interpretability.
-  - **Enhanced Multi-Layer Perceptron (MLP)** - A deep neural network optimized with dropout layers for improved generalization.
-  - **Deep Cross Network (DCN)** - A model combining cross-layer and deep-layer architecture for effective feature interaction.
+## Project Workflow
 
-- **Hyperparameter Tuning**: Grid search and cross-validation techniques applied to optimize model performance.
+### 1. Data Cleaning and Preparation
+- **Data Loading and Inspection**: Initial assessment of data structure and identifying missing or redundant columns.
+- **Data Quality Assessment**: Cleaning steps include handling missing values, removing duplicates, converting timestamps, and standardizing column names.
+- **Data Transformation**: Conversion of specific columns like `scraped_at` to datetime format for temporal analysis and dropping low-variance columns such as `currency` and `brand` to streamline the dataset.
 
-- **Performance Metrics**: Comprehensive evaluation using MAE, MSE, RMSE, and MAPE to compare model accuracy and robustness on the test dataset.
+### 2. Exploratory Data Analysis (EDA)
+- **Sales Volume Distribution**: Visualization and statistical tests confirm a balanced distribution of sales volume, with slight non-normality.
+- **Product Position and Promotion Impact**: Analysis using boxplots and ANOVA tests shows minimal influence of position or promotions on sales volume.
+- **Seasonality**: Seasonal products do not show significant variation in sales volume compared to non-seasonal products.
+- **Price Impact**: Slightly lower sales volume for products priced over $200, though price has a weak overall correlation with sales volume.
 
-- **Feature Importance Analysis**: Examination of feature importance for interpretability, with visualizations to highlight influential features across models.
+### 3. Feature Engineering
+- **Numerical Transformation**: Price scaling using `StandardScaler`.
+- **Categorical Encoding**: One-hot encoding for columns like `product_position`, `promotion`, `section`, and `terms` to incorporate categorical variables effectively.
 
-- **Visualizations**: Training and validation loss curves, feature importance plots, and comparative performance bar charts to provide clear insights into model behavior and performance.
+### 4. Modeling
+   - **Random Forest Regressor**: Initial model for robust prediction, tuned via `GridSearchCV` for optimal hyperparameters.
+   - **Deep Complex Network (DCN)**: Tuned with configurations in `dcn_tuning/` for enhanced non-linear modeling.
 
-#### Objectives:
-The goal of this project is to develop a robust predictive model that accurately forecasts sales volume, which can be used by businesses to make informed inventory and sales strategy decisions. By exploring different modeling approaches and evaluating them on key metrics, this project aims to identify the most effective model for the task.
+## Key Insights
+- **Sales Volume Drivers**: Position, promotion, seasonality, and price have limited statistical significance on sales volume in this dataset.
+- **Promotions and Seasonality**: Limited effectiveness of promotions and seasonality on increasing sales volume.
+- **Product Position**: Slight increase in sales at the Front of Store, but not statistically significant.
 
-#### Use Case:
-This repository is intended for data scientists, machine learning practitioners, and business analysts interested in sales forecasting using machine learning. The code is modular and can be adapted to similar prediction tasks involving structured, tabular data.
+## Results
+The project provides interpretable insights into factors affecting sales volume, concluding with a machine learning model that moderately predicts sales volume based on the dataset’s features.
+
+## Getting Started
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/sales-volume-prediction.git
+   ```
+2. Navigate to the repository:
+   ```bash
+   cd sales-volume-prediction
+   ```
+3. Install the dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Run the notebook to reproduce the analysis and predictions.
+
+## Dependencies
+The project requires:
+- `numpy`, `pandas` for data manipulation
+- `matplotlib`, `seaborn` for visualization
+- `scikit-learn` for machine learning models
+- `tensorflow`, `pytorch_tabnet` for deep learning models

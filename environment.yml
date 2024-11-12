@@ -1,0 +1,20 @@
+name: sales_volume_env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8
+  - numpy
+  - pandas
+  - matplotlib
+  - seaborn
+  - scipy
+  - statsmodels
+  - scikit-learn
+  - tensorflow
+  - pip
+  - pip:
+      - torch==1.9.0+cpu
+      - torchvision==0.10.0+cpu
+      - torchaudio==0.9.0
+      - pytorch-tabnet
